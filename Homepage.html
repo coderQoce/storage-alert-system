@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Storage Alert</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #fff;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 450px;
+            margin: auto;
+            position: relative;
+        }
+
+        .notification-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 22px;
+            color: #ff5722;
+            cursor: pointer;
+        }
+
+        .page-header {
+            margin-top: 35px;
+            text-align: center;
+        }
+
+        .gauge-wrap {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: 20px auto;
+        }
+
+        .gauge {
+            display: block;
+            width: 160px;
+            height: 160px;
+            transform: rotate(-90deg);
+        }
+
+        .gauge .track {
+            fill: none;
+            stroke: #e6e6e6;
+            stroke-width: 14;
+        }
+
+        .gauge .progress {
+            fill: none;
+            stroke: #28a745;
+            stroke-width: 14;
+            stroke-linecap: round;
+            stroke-dasharray: 427;
+            stroke-dashoffset: 427;
+            transition: stroke-dashoffset 1.6s ease-in-out;
+        }
+
+        .gauge-center {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            pointer-events: none;
+        }
+
+        .gauge-center .value {
+            font-weight: 700;
+            font-size: 1.2rem;
+            line-height: 1.1;
+        }
+
+        .gauge-center .sub {
+            font-size: 0.8rem;
+            color: #6c757d;
+            margin-top: 2px;
+        }
+
+        .storage-card {
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .storage-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-custom {
+            border-radius: 8px;
+            font-weight: bold;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .btn-move {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .btn-sell {
+            background-color: #ff6f00;
+            color: #fff;
+        }
+
+        .btn-price {
+            background-color: #ff3d00;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="notification.html" class="notification-icon">
+        <i class="fa-regular fa-bell"></i>
+    </a>
+
+
+    <div class="page-header">
+        <h4 class="fw-bold">Smart Storage Alert</h4>
+        <p class="text-muted">Nearby storage availability</p>
+
+        <div class="gauge-wrap">
+            <svg class="gauge" viewBox="0 0 160 160" data-percent="45">
+
+                <circle class="track" cx="80" cy="80" r="68"></circle>
+                <circle class="progress" cx="80" cy="80" r="68"></circle>
+            </svg>
+            <div class="gauge-center">
+                <div>
+                    <div class="value" id="gaugeVal">45%</div>
+                    <div class="sub">available</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="storage-card">
+        <div class="storage-info">
+            <i class="fa-solid fa-snowflake text-success"></i>
+            <div>
+                <strong>Nearest Cold Room</strong><br>
+                <small class="text-muted">70% full</small>
+            </div>
+        </div>
+        <div>
+            <i class="fa-solid fa-location-dot text-muted"></i>
+            <small>3km away</small>
+        </div>
+    </div>
+
+    <div class="storage-card">
+        <div class="storage-info">
+            <i class="fa-solid fa-building text-success"></i>
+            <div>
+                <strong>Nearest Cold Room</strong><br>
+                <small class="text-muted">60% full</small>
+            </div>
+        </div>
+        <div>
+            <i class="fa-solid fa-location-dot text-muted"></i>
+            <small>8km away</small>
+        </div>
+    </div>
+
+    <div class="storage-card">
+        <div class="storage-info">
+            <i class="fa-solid fa-building text-success"></i>
+            <div>
+                <strong>Nearest Cold Room</strong><br>
+                <small class="text-muted">80% full</small>
+            </div>
+        </div>
+        <div>
+            <i class="fa-solid fa-location-dot text-muted"></i>
+            <small>5km away</small>
+        </div>
+    </div>
+
+    <button class="btn btn-custom btn-move w-100">
+        <i class="bi bi-truck"></i> Move Crops
+    </button>
+    <button class="btn btn-custom btn-sell w-100">
+        <i class="bi bi-cart"></i> Sell Crops
+    </button>
+    <button class="btn btn-custom btn-price w-100">
+        <i class="fa-regular fa-star"></i> Get Price Advice
+    </button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+
+        document.querySelectorAll('.gauge').forEach(g => {
+            const r = 68;
+            const c = 2 * Math.PI * r;
+            const p = parseFloat(g.dataset.percent) || 0;
+            const progress = g.querySelector('.progress');
+            progress.style.strokeDasharray = c;
+            progress.style.strokeDashoffset = c * (1 - p / 100);
+
+
+            const valEl = document.getElementById('gaugeVal');
+            if (valEl) valEl.textContent = p + '%';
+        });
+    </script>
+</body>
+
+</html>
