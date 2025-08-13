@@ -44,15 +44,20 @@
       font-size: 16px;
       text-decoration: none;
       color: white;
+      transition: transform 0.2s ease, background-color 0.2s ease;
     }
     .btn-move {
       background-color: #28a745;
     }
     .btn-sell {
-      background-color: #ff6600;
+      background-color: #ff6f00;
     }
     .btn-price {
-      background-color: #ff6600;
+      background-color: #ff3d00;
+    }
+    .btn-custom:hover {
+      transform: scale(1.03);
+      filter: brightness(1.1);
     }
     .icon-outline {
       color: transparent;
@@ -93,10 +98,10 @@
   <a href="movecrops.html" class="btn btn-custom btn-move w-100">
     <i class="bi bi-truck"></i> Move Crops
   </a>
-  <a href="#" class="btn btn-custom btn-sell w-100">
+  <a href="sell-crops.html" class="btn btn-custom btn-sell w-100">
     <i class="bi bi-cart"></i> Sell Crops
   </a>
-  <a href="#" class="btn btn-custom btn-price w-100">
+  <a href="price-advice.html" class="btn btn-custom btn-price w-100">
     <i class="fa-regular fa-star"></i> Get Price Advice
   </a>
 

@@ -103,6 +103,7 @@
             font-weight: bold;
             padding: 10px;
             margin-top: 10px;
+            transition: all 0.2s ease-in-out;
         }
 
         .btn-move {
@@ -119,6 +120,28 @@
             background-color: #ff3d00;
             color: #fff;
         }
+
+        .btn-move a,
+        .btn-sell a,
+        .btn-price a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .btn-move:hover {
+            background-color: #218838;
+            transform: scale(1.03);
+        }
+
+        .btn-sell:hover {
+            background-color: #e65c00;
+            transform: scale(1.03);
+        }
+
+        .btn-price:hover {
+            background-color: #cc3300;
+            transform: scale(1.03);
+        }
     </style>
 </head>
 
@@ -127,14 +150,12 @@
         <i class="fa-regular fa-bell"></i>
     </a>
 
-
     <div class="page-header">
         <h4 class="fw-bold">Smart Storage Alert</h4>
         <p class="text-muted">Nearby storage availability</p>
 
         <div class="gauge-wrap">
             <svg class="gauge" viewBox="0 0 160 160" data-percent="45">
-
                 <circle class="track" cx="80" cy="80" r="68"></circle>
                 <circle class="progress" cx="80" cy="80" r="68"></circle>
             </svg>
@@ -190,18 +211,17 @@
     </div>
 
     <button class="btn btn-custom btn-move w-100">
-        <i class="bi bi-truck"></i> Move Crops
+        <a href="movecrops.html"><i class="bi bi-truck"></i> Move Crops</a>
     </button>
     <button class="btn btn-custom btn-sell w-100">
-        <i class="bi bi-cart"></i> Sell Crops
+        <a href="sell-crops.html"><i class="bi bi-cart"></i> Sell Crops</a>
     </button>
     <button class="btn btn-custom btn-price w-100">
-        <i class="fa-regular fa-star"></i> Get Price Advice
+        <a href="price-advice.html"><i class="fa-regular fa-star"></i> Get Price Advice</a>
     </button>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-
         document.querySelectorAll('.gauge').forEach(g => {
             const r = 68;
             const c = 2 * Math.PI * r;
@@ -209,12 +229,9 @@
             const progress = g.querySelector('.progress');
             progress.style.strokeDasharray = c;
             progress.style.strokeDashoffset = c * (1 - p / 100);
-
-
             const valEl = document.getElementById('gaugeVal');
             if (valEl) valEl.textContent = p + '%';
         });
     </script>
 </body>
-
 </html>
