@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Market Trends</title>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f9f9f9;
+    }
+    .app-container {
+      max-width: 420px;
+      margin: auto;
+  
+      min-height: 100vh;
+      padding: 20px;
+      border-radius: 16px;
+    }
+    .card {
+      border-radius: 12px;
+      margin-bottom: 15px;
+    }
+    .chart-container {
+      position: relative;
+      height: 250px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+
+     <div class="mb-3">
+    <a href="Homepage.html" class="text-dark">
+      <i class="bi bi-arrow-left icon-box"></i>
+    </a>
+  </div>
+    
+    <div class="row g-2 mb-3">
+      <div class="col">
+        <select class="form-select">
+          <option selected>Maize</option>
+          <option>Tomatoes</option>
+          <option>Rice</option>
+        </select>
+      </div>
+      <div class="col">
+        <select class="form-select">
+          <option selected>Ijebu</option>
+          <option>Lagos</option>
+          <option>Abeokuta</option>
+        </select>
+      </div>
+    </div>
+
+   
+    <div class="card p-3">
+      <div class="chart-container">
+        <canvas id="priceChart"></canvas>
+      </div>
+    </div>
+
+    <div class="card p-3">
+      <h6><strong>Best rates nearby</strong></h6>
+      <div class="d-flex justify-content-between">
+        <span>Ijebu Main Market</span>
+        <span>#340/Kg</span>
+      </div>
+      <div class="d-flex justify-content-between">
+        <span>Abeokuta Fresh</span>
+        <span>#335/Kg</span>
+      </div>
+      <div class="mt-2 text-muted small">
+        Suggestion: Prices are trending up. Consider selling soon
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    const ctx = document.getElementById('priceChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
+        datasets: [{
+          label: 'Price',
+          data: [10, 30, 50, 70, 20, 40, 60],
+          fill: true,
+          borderColor: 'blue',
+          backgroundColor: 'rgba(0, 123, 255, 0.2)',
+          tension: 0.3,
+          pointBackgroundColor: 'blue'
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { stepSize: 25 }
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
